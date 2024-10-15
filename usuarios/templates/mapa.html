@@ -44,13 +44,39 @@
     <div id="map" class="mx-auto container rounded-lg"></div>
 
     <!-- Sidebar para exibir informações -->
-    <div class="sidebar p-4 transform" id="infoSidebar">
-        <h2 class="text-xl font-semibold text-gray-800" id="localName"></h2>
-        <p class="text-gray-600" id="localInfo"></p>
-        <p class="text-gray-600" id="localendereco"></p>
-        <img id="localImage" src="" alt="Imagem do Local" class="w-full h-40 object-cover rounded-lg mt-4 shadow-md">
-        <button id="closeSidebar" class="mt-4 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition-colors">Fechar</button>
-    </div>
+<div class="sidebar p-4 transform" id="infoSidebar">
+    <h2 class="text-xl font-semibold text-gray-800" id="localName">Nome do Local</h2>
+    <p class="text-gray-600" id="localInfo">Informação sobre o local</p>
+    <p class="text-gray-600" id="localendereco">Endereço do local</p>
+    <img id="localImage" src="" alt="Imagem do Local" class="w-full h-40 object-cover rounded-lg mt-4 shadow-md">
+
+    <!-- Tabela de informações adicionais -->
+    <table class="mt-4 w-full border-collapse">
+        <thead>
+            <tr>
+                <th class="border-b border-gray-300 text-left p-2">Tipo de tecido</th>
+                <th class="border-b border-gray-300 text-left p-2">metragem</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="border-b border-gray-300 p-2">Jeans</td>
+                <td class="border-b border-gray-300 p-2">6m</td>
+            </tr>
+            <tr>
+                <td class="border-b border-gray-300 p-2">Lycra</td>
+                <td class="border-b border-gray-300 p-2">10m</td>
+            </tr>
+            <tr>
+                <td class="border-b border-gray-300 p-2">algodão</td>
+                <td class="border-b border-gray-300 p-2">20m</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button id="closeSidebar" class="mt-4 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition-colors">Fechar</button>
+</div>
+
 
     <script>
         // Inicializar o mapa em Pernambuco (coordenadas aproximadas)
