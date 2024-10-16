@@ -73,10 +73,10 @@ Para rodar o projeto localmente, siga os passos abaixo:
 
 ## Como Usar
 
-    Cadastro de ONGs: ONGs podem se cadastrar e informar os locais de coleta de tecidos.
-    Cadastro de Doações: Usuários podem cadastrar suas doações, informando o tipo de tecido, quantidade e localização.
-    Busca: Utilize o mapa ou a barra de busca para encontrar pontos de coleta ou ONGs específicas.
-    Filtros: Filtre os resultados por tipo de tecido ou proximidade geográfica.
+  Cadastro de ONGs: ONGs podem se cadastrar e informar os locais de coleta de tecidos.
+  Cadastro de Doações: Usuários podem cadastrar suas doações, informando o tipo de tecido, quantidade e localização.
+  Busca: Utilize o mapa ou a barra de busca para encontrar pontos de coleta ou ONGs específicas.
+  Filtros: Filtre os resultados por tipo de tecido ou proximidade geográfica.
 
 ## Links
 
