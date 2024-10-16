@@ -84,7 +84,7 @@ Causa: O problema estava relacionado à maneira como as classes CSS eram passada
 Solução: Para corrigir, revisamos como as classes CSS eram geradas e aplicadas aos elementos de mapa. Garantimos que todas as classes necessárias fossem passadas de forma explícita via contexto para o template Django. Além disso, verificamos se o arquivo de CSS do Leaflet.js estava sendo carregado corretamente no template.
 Corrigimos o problema ao garantir que as classes CSS fossem aplicadas dinamicamente de forma adequada no HTML gerado, e revisamos a configuração do STATIC_url para carregar os estilos corretos do Leaflet.js. Isso restaurou a renderização apropriada dos estilos e funcionalidades do mapa no frontend.
 
-### Issue Fechada:
+### Issue Aberta:
 ![image](https://github.com/user-attachments/assets/38cb1ddc-bd16-49d3-99f6-607d4282b8a2)
 
 ## Deployment
