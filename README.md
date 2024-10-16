@@ -9,8 +9,9 @@ Este projeto é uma plataforma web que permite a localização de doações de t
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [Instalação](#instalação)
 - [Como Usar](#como-usar)
-- [Licença](#licença)
 - [Links](#links)
+- [Licença](#licença)
+
 
 ## Descrição do Projeto
 
@@ -75,11 +76,11 @@ Para rodar o projeto localmente, siga os passos abaixo:
     Busca: Utilize o mapa ou a barra de busca para encontrar pontos de coleta ou ONGs específicas.
     Filtros: Filtre os resultados por tipo de tecido ou proximidade geográfica.
 
-## Licença
-  
-Este projeto está licenciado sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
-
 ## Links
 
   - TRELLO: https://drive.google.com/file/d/1kQ6dO-DEH4K1aShqM6Eu_-71e0VDUZxx/view?usp=drive_link
   - SR1.md: wip
+
+## Licença
+  
+Este projeto está licenciado sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
