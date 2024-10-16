@@ -62,11 +62,30 @@ Este projeto visa criar uma plataforma de gestão de resíduos que permita a ONG
 
 ## Diagrama de Atividades
 
-Foi criado um diagrama de atividades que detalha o fluxo de interação entre os usuários e o sistema, cobrindo desde o login até o gerenciamento de inventários e visualização dos pontos de coleta. O diagrama está disponível para consulta [aqui](#).
+Foi criado um diagrama de atividades que detalha o fluxo de interação entre os usuários e o sistema, cobrindo desde o login até o gerenciamento de inventários e visualização dos pontos de coleta. O diagrama está disponível para consulta. 
+
+### Fluxograma:
+![image](https://github.com/user-attachments/assets/1838c98a-c6d4-4515-8096-967c9d2f81d4)
 
 ## Atualização do Bugtracker
+Problema de Django não Reconhecendo a Pasta Static
 
-Todas as issues relacionadas aos bugs encontrados até o momento foram documentadas e atualizadas no Bugtracker. Foram criados novos relatórios de bugs e atualizações de progresso em cada uma das issues.
+Issue: O Django não estava reconhecendo os arquivos na pasta static, resultando em falhas ao carregar CSS e JavaScript no frontend.
+
+Causa: A configuração para servir arquivos estáticos em modo de desenvolvimento estava incompleta. O Django não sabia onde buscar os arquivos estáticos devido à ausência da definição correta no arquivo settings.py, além da configuração da URL para arquivos estáticos no arquivo urls.py.
+
+Solução: Corrigimos o problema adicionando a configuração correta para STATIC_URL e STATICFILES_DIRS no settings.py, garantindo que o Django soubesse o caminho para a pasta static. Também foi necessário verificar se a URL para servir os arquivos estáticos estava configurada corretamente no urls.py ao incluir from django.conf import settings e from django.conf.urls.static import static, seguido de urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT).
+
+Esse ajuste permitiu que os arquivos CSS e JavaScript fossem servidos corretamente, resolvendo o problema de renderização de estilo no frontend.
+
+Problema com o Leaflet.js Não Reconhecendo Classes CSS Passadas pelo Django
+Issue: As classes CSS aplicadas aos mapas Leaflet.js, que foram geradas dinamicamente via Django, não estavam sendo reconhecidas, resultando em falhas no estilo ou na funcionalidade dos mapas.
+Causa: O problema estava relacionado à maneira como as classes CSS eram passadas para o template. Algumas classes específicas, principalmente aquelas relacionadas ao estilo dinâmico dos mapas, não estavam sendo aplicadas corretamente, possivelmente devido a conflitos no escopo ou à maneira como o Django estava gerando as classes nos templates.
+Solução: Para corrigir, revisamos como as classes CSS eram geradas e aplicadas aos elementos de mapa. Garantimos que todas as classes necessárias fossem passadas de forma explícita via contexto para o template Django. Além disso, verificamos se o arquivo de CSS do Leaflet.js estava sendo carregado corretamente no template.
+Corrigimos o problema ao garantir que as classes CSS fossem aplicadas dinamicamente de forma adequada no HTML gerado, e revisamos a configuração do STATIC_url para carregar os estilos corretos do Leaflet.js. Isso restaurou a renderização apropriada dos estilos e funcionalidades do mapa no frontend.
+
+### Issue Fechada:
+![image](https://github.com/user-attachments/assets/38cb1ddc-bd16-49d3-99f6-607d4282b8a2)
 
 ## Deployment
 
@@ -77,6 +96,12 @@ As histórias implementadas foram devidamente testadas e já estão disponíveis
 Nós, da parte de programação da Eco Storage, utilizamos a técnica de programação em par, a qual se trata de duas pessoas colaborarem no código juntas, enquanto uma escreve o código e diz as ideias para a outra, essa outra vai revisando e analisando o código para encontrar erros e possíveis melhorias.
 Essa técnica foi utilizada majoritariamente em questões que pudessem ser resolvidas em um não tão longo período de tempo.
 Além disso, para que pudessemos usufruir totalmente dessa técnica, utilizamos a extensão "Live Share" do VSCode, o que resultou em feedbacks rápidos e pcorreção imediata do código, já que a pessoa que estava analisando o código podia o editar por si só.
+
+Par 00 - Raphael e Beatriz
+- Coube à dupla fazer a integração do banco de dados SQLite com Django e com JSON, também a interação de template e views.
+
+Par 01 - Rafael e Raphael
+- O live Share foi utilizado nesse caso para uma correção de bug no deploy, Rafasel fez a formatação correta das pastas, mas ao encontrar erross no comnmit do github, teve o auxílio de Raphael para criar a branch de produção.
 
 ---
 
