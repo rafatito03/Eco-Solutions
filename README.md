@@ -3,7 +3,7 @@
 Este projeto é uma plataforma web que permite a localização de doações de tecidos para ONGs. Ele apresenta um mapa interativo onde os usuários podem visualizar, cadastrar e buscar por pontos de coleta de tecidos, facilitando a distribuição e reutilização de materiais para projetos sociais e ambientais.
 
 ## Índice
-
+- [Link SR1](#link-sr1)
 - [Descrição do Projeto](#descrição-do-projeto)
 - [Funcionalidades](#funcionalidades)
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
@@ -12,6 +12,8 @@ Este projeto é uma plataforma web que permite a localização de doações de t
 - [Links](#links)
 - [Licença](#licença)
 
+## Link SR1
+- [SR1](https://github.com/rafatito03/Eco-Solutions/blob/main/SR1.md)
 
 ## Descrição do Projeto
 
@@ -53,21 +55,21 @@ Para rodar o projeto localmente, siga os passos abaixo:
    ```
 
 3. Crie e ative um ambiente virtual:
-  ```
-  python -m venv venv
-  source venv/bin/activate   # Linux/MacOS
-  venv\Scripts\Activate      # Windows
-  ```
+    ```
+    python -m venv venv
+    source venv/bin/activate   # Linux/MacOS
+    venv\Scripts\Activate      # Windows
+    ```
 
 4. Inicie o servidor de desenvolvimento:
-  ```
-  python manage.py runserver
-  ```
+    ```
+    python manage.py runserver
+    ```
 
 5. Acesse o projeto no navegador:
-  ```
-  http://localhost:8000
-  ```
+    ```
+    http://localhost:8000
+    ```
 
 ## Como Usar
 
