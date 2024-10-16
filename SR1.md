@@ -101,7 +101,7 @@ Par 00 - Raphael e Beatriz
 - Coube à dupla fazer a integração do banco de dados SQLite com Django e com JSON, também a interação de template e views.
 
 Par 01 - Rafael e Raphael
-- O live Share foi utilizado nesse caso para uma correção de bug no deploy, Rafasel fez a formatação correta das pastas, mas ao encontrar erross no comnmit do github, teve o auxílio de Raphael para criar a branch de produção.
+- O live Share foi utilizado nesse caso para uma correção de bug no deploy, Rafael fez a formatação correta das pastas, mas ao encontrar erros no commit do github, teve o auxílio de Raphael para criar a branch de produção.
 
 ---
 
