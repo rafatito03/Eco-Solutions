@@ -9,7 +9,6 @@ Este projeto é uma plataforma web que permite a localização de doações de t
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [Instalação](#instalação)
 - [Como Usar](#como-usar)
-- [Links](#links)
 - [Licença](#licença)
 
 ## Link SR1
@@ -77,11 +76,6 @@ Para rodar o projeto localmente, siga os passos abaixo:
   Cadastro de Doações: Usuários podem cadastrar suas doações, informando o tipo de tecido, quantidade e localização.
   Busca: Utilize o mapa ou a barra de busca para encontrar pontos de coleta ou ONGs específicas.
   Filtros: Filtre os resultados por tipo de tecido ou proximidade geográfica.
-
-## Links
-
-  - TRELLO: https://drive.google.com/file/d/1kQ6dO-DEH4K1aShqM6Eu_-71e0VDUZxx/view?usp=drive_link
-  - SR1.md: wip
 
 ## Licença
   
