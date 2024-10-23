@@ -21,3 +21,14 @@ class Residuos(models.Model):
     
     def __str__(self):
         return f"{self.tipo} - {self.quantidade} unidades"
+    
+class ONG(models.Model):
+    nome = models.CharField(max_length=100)
+    class Meta:
+        permissions = [
+            ("can_manage_local", "Can manage local"),
+            ("can_manage_residuos", "Can manage residuos"),
+        ]
+
+    def __str__(self):
+        return self.nome
