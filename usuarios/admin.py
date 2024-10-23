@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import Residuos, Local, ONG
 
-# Register your models here.
+
+admin.site.register(ONG)
+admin.site.register(Residuos)
+admin.site.register(Local)
