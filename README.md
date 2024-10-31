@@ -43,29 +43,39 @@ O **Eco Solutionss** tem como objetivo conectar doadores e ONGs que precisam de 
 
 Para rodar o projeto localmente, siga os passos abaixo:
 
-1. Clone o repositório:
+1. Instale o necessário:
+    ```
+    Instalação do Git pelo link: https://git-scm.com/downloads
 
+    Instalação do Python pelo link: https://www.python.org/downloads/
+    ```
+    git clone 
+    ``````
+2. Clone o repositório:
    ```
    git clone https://github.com/rafatito03/Eco-Solutions/
    ```
-2. Acesse o diretório do projeto:
+3. Acesse o diretório do projeto:
    ```
    cd Eco-Solutions
    ```
-
-3. Crie e ative um ambiente virtual:
+   
+4. Crie e ative um ambiente virtual:
     ```
     python -m venv venv
     source venv/bin/activate   # Linux/MacOS
     venv\Scripts\Activate      # Windows
     ```
-
-4. Inicie o servidor de desenvolvimento:
+5. Instale o Django:
+   ```
+   pip install django
+   ```
+6. Inicie o servidor de desenvolvimento:
     ```
     python manage.py runserver
     ```
 
-5. Acesse o projeto no navegador:
+7. Acesse o projeto no navegador:
     ```
     http://localhost:8000
     ```
