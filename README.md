@@ -48,9 +48,6 @@ Para rodar o projeto localmente, siga os passos abaixo:
     Instalação do Git pelo link: https://git-scm.com/downloads
 
     Instalação do Python pelo link: https://www.python.org/downloads/
-    ```
-    git clone 
-    ``````
 2. Clone o repositório:
    ```
    git clone https://github.com/rafatito03/Eco-Solutions/
