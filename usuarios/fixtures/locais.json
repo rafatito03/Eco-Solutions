@@ -1,27 +1,30 @@
 [
     {
-        "model": "usuarios.local", 
+        "model": "usuarios.ong", 
         "pk": 1,  
         "fields": {
             "nome": "Doe agora",
+            "cnpj": "12.345.678/0001-99",
             "endereco": "Av. Boa Viagem, 123",
             "latitude": -8.047562,
             "longitude": -34.877001,
-            "informacao": "Doe seus tecidos velhos como cortina,lençois,horário de funcionamento das 7h ás 18h",
-            "imagem":"imagens/brigadeiro.JPG"
+            "informacao": "Doe seus tecidos velhos como cortina, lençóis. Horário de funcionamento das 7h às 18h.",
+            "imagem": "imagens/brigadeiro.JPG",
+            "usuario": null
         }
     },
     {
-        "model": "usuarios.local",  
+        "model": "usuarios.ong",  
         "pk": 2,  
         "fields": {
             "nome": "Doe aqui",
+            "cnpj": "98.765.432/0001-10",
             "endereco": "Propriedade de São João, 200",
             "latitude": -8.036560,
             "longitude": -34.921494,
-            "informacao": "Doe suas roupas velhas aqui no próprio instituto Ricardo Brennand,horário de funcionamento das 8 ás 19h",
-            "imagem":"imagens/ricardo.jpg"
-            
+            "informacao": "Doe suas roupas velhas aqui no próprio instituto Ricardo Brennand. Horário de funcionamento das 8h às 19h.",
+            "imagem": "imagens/ricardo.jpg",
+            "usuario": null
         }
     }
 ]

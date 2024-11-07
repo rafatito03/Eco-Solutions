@@ -1,7 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
 from django.contrib.auth.models import User
+from .models import  ONG, Residuos
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import DetailView
 
 def user_login(request):
     if request.method == 'POST':
@@ -13,7 +18,14 @@ def user_login(request):
             if user is not None:
                 auth_login(request, user)
                 messages.success(request, f'Bem-vindo, {username}!')
-                return redirect('home')  
+
+                # Obtém a ONG do usuário e redireciona para a página específica dela
+                try:
+                    ong = user.ong
+                    return redirect('ong_detail', pk=ong.pk)
+                except ONG.DoesNotExist:
+                    # Caso o usuário não tenha uma ONG associada, redireciona para 'mapa'
+                    return redirect('mapa')
             else:
                 messages.error(request, 'Usuário ou senha inválidos.')
         else:
@@ -58,11 +70,24 @@ def cadastro(request):
 
     return render(request, 'cadastro.html')
 
-from .models import Local
-from .models import Residuos
+
 
 def mapa(request):
-    locais = Local.objects.all()
-    residuos = Residuos.objects.all()
+    locais = ONG.objects.all()
     return render(request, 'mapa.html', {'locais': locais})
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import DetailView
+
+class OngDetailView(LoginRequiredMixin, DetailView):
+    model = ONG
+    template_name = 'ong_detail.html'
+    context_object_name = 'ong'
+
+    def get_queryset(self):
+        # Filtra para que apenas a ONG do usuário logado seja acessada
+        return ONG.objects.filter(usuario=self.request.user)
+
+def verificar_ong(request, pk):
+    ong = get_object_or_404(ONG, pk=pk, usuario=request.user)
+    return render(request, 'ong_detail.html', {'ong': ong})

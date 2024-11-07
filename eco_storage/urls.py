@@ -9,4 +9,5 @@ urlpatterns = [
     path('logout/', views.user_logout, name='logout'),
     path('home/', views.home, name='home'),
     path('mapa/',views.mapa,name='mapa'),
+    path('ong/<int:pk>/', views.verificar_ong, name='ong_detail'),
 ]
