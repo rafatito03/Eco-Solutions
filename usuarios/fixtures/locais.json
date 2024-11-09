@@ -9,7 +9,7 @@
             "latitude": -8.047562,
             "longitude": -34.877001,
             "informacao": "Doe seus tecidos velhos como cortina, lençóis. Horário de funcionamento das 7h às 18h.",
-            "imagem": "imagens/brigadeiro.JPG",
+            "imagem": "https://www.fernandomachado.blog.br/wp-content/uploads/2016/02/casa-do-brigadeiro2.jpg",  
             "usuario": null
         }
     },
@@ -23,7 +23,7 @@
             "latitude": -8.036560,
             "longitude": -34.921494,
             "informacao": "Doe suas roupas velhas aqui no próprio instituto Ricardo Brennand. Horário de funcionamento das 8h às 19h.",
-            "imagem": "imagens/ricardo.jpg",
+            "imagem": "https://images.tcdn.com.br/img/img_prod/460977/estatua_colecionavel_snorlax_pokemon_15cm_anime_manga_mega_saldao_mkp_127547_1_be24705fdfde2134b0fef1815fe934d4.jpg",  
             "usuario": null
         }
     }

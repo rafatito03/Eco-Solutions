@@ -8,7 +8,7 @@ class ONG(models.Model):
     latitude = models.FloatField(default=0)
     longitude = models.FloatField(default=0)
     informacao = models.TextField(blank=True, null=True)
-    imagem = models.CharField(max_length=100, null=True, blank=True, default='imagens/rick_roll.jpg')
+    imagem = models.CharField(max_length=1000, null=True, blank=True, default='imagens/rick_roll.jpg')
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name='ong',null=True)
 
     def __str__(self):

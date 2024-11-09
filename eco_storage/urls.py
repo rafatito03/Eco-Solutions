@@ -10,4 +10,5 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('mapa/',views.mapa,name='mapa'),
     path('ong/<int:pk>/', views.verificar_ong, name='ong_detail'),
+    path('ong/<int:ong_id>/update/', views.update_ong, name='update_ong'),
 ]

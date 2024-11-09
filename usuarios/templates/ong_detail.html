@@ -1,10 +1,53 @@
-<!-- templates/ong_detail.html -->
-<html>
-<head><title>{{ ong.nome }}</title></head>
-<body>
-    <h1>{{ ong.nome }}</h1>
-    <p>Endereço: {{ ong.endereco }}</p>
-    <p>CNPJ: {{ ong.cnpj }}</p>
-    <!-- outras informações -->
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalhes da ONG</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
+</head>
+<body class="bg-neutral-950 bg-gradient min-h-screen">
+    <div class="container mx-auto p-8">
+        <div class="flex items-center space-x-8 mb-4">
+            <a href="{% url 'home' %}">
+                <div class="bg-purple-400 hover:bg-purple-600 p-2 rounded-lg">
+                    <i class="bi bi-arrow-return-left text-2xl text-white"></i>
+                </div>
+            </a>
+            <h1 class="text-4xl font-bold text-white mx-auto">{{ ong.nome }}</h1>
+        </div>
+
+        <!-- Formulário de atualização da ONG -->
+        <h2 class="text-2xl font-semibold text-white mb-4">Atualizar Informações</h2>
+        <div class="bg-gray-800 rounded-lg">
+            <form method="post" action="{% url 'update_ong' ong.id %}" class="mb-8 p-6 rounded-lg shadow-md">
+                {% csrf_token %}
+                
+                <label class="block text-white font-semibold mb-2">Nome da ONG</label>
+                <input type="text" name="nome" value="{{ ong.nome }}" required class="w-full p-2 border border-white-300 rounded mb-4">
+
+                <label class="block text-white font-semibold mb-2">CNPJ</label>
+                <input type="text" name="cnpj" value="{{ ong.cnpj }}" required class="w-full p-2 border border-white-300 rounded mb-4">
+
+                <label class="block text-white font-semibold mb-2">Endereço</label>
+                <input type="text" name="endereco" value="{{ ong.endereco }}" required class="w-full p-2 border border-white-300 rounded mb-4">
+
+                <label class="block text-white font-semibold mb-2">Latitude(em formato decimal)</label>
+                <input type="text" name="latitude" value="{{ ong.latitude }}" required class="w-full p-2 border border-white-300 rounded mb-4">
+
+                <label class="block text-white font-semibold mb-2">Longitude(em formato decimal)</label>
+                <input type="text" name="longitude" value="{{ ong.longitude }}" required class="w-full p-2 border border-white-300 rounded mb-4">
+
+
+                <label class="block text-white font-semibold mb-2">Informações</label>
+                <textarea name="informacao" class="w-full p-2 border border-white-300 rounded mb-4">{{ ong.informacao }}</textarea>
+
+                <label class="block text-white font-semibold mb-2">Imagem (URL)</label>
+                <input type="text" name="imagem" value="{{ ong.imagem }}" class="w-full p-2 border border-white-300 rounded mb-4">
+
+                <button type="submit" class="px-4 py-2 bg-purple-500 text-white rounded transition duration-400 ease-in-out transform hover:scale-110">Atualizar</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

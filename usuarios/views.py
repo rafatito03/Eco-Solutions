@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from .models import  ONG, Residuos
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView
+from .forms import ONGForm
 
 def user_login(request):
     if request.method == 'POST':
@@ -91,3 +92,25 @@ class OngDetailView(LoginRequiredMixin, DetailView):
 def verificar_ong(request, pk):
     ong = get_object_or_404(ONG, pk=pk, usuario=request.user)
     return render(request, 'ong_detail.html', {'ong': ong})
+
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import ONGForm
+from .models import ONG
+
+def update_ong(request, ong_id):
+    ong = get_object_or_404(ONG, id=ong_id)
+    
+    # Verifica se o usuário logado é o dono da ONG
+    if ong.usuario != request.user:
+        return HttpResponseForbidden("Você não tem permissão para editar esta ONG.")
+    
+    if request.method == 'POST':
+        form = ONGForm(request.POST, instance=ong)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Informações atualizadas com sucesso!")
+            return redirect('ong_detail', pk=ong.id)
+    else:
+        form = ONGForm(instance=ong)
+    
+    return render(request, 'ong_detail.html', {'form': form, 'ong': ong})
