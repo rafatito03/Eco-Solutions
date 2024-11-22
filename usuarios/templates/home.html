@@ -7,9 +7,91 @@
     <title>Home</title>
 </head>
 <body>
+
+
 <header>
-    <h1>Bem-vindo ao Eco Storage</h1>
+    <nav class="bg-gray-800 flex items-center justify-between px-8">
+        <div class="flex items-center">
+            <h1 class="text-green-500 text-2xl mr-10">EcoStorage</h1>
+            <a href="/home" class="text-white py-7 px-5 hover:bg-gray-300 hover:text-black">Home</a>
+            <a href="/mapa" class="text-white py-7 px-5 hover:bg-gray-300 hover:text-black">Mapa</a>
+        </div>
+        <div class="auth-buttons flex">
+            <button class="bg-green-500 text-white py-2 px-4 ml-6 rounded hover:bg-green-600" onclick="window.location.href='/login'">Login</button>
+            <button class="bg-green-500 text-white py-2 px-4 ml-6 rounded hover:bg-green-600" onclick="window.location.href='/cadastro'">Cadastro</button>
+        </div>
+    </nav>
 </header>
+<br>
+    <div class="text-center justify-between px-8 justify-content align-center">
+        <h1 class="text-green-500 text-2xl mr-10">Bem-vindo(a) ao Eco Storage!</h1>
+    </div>
+    
+<section class="carousel-container relative overflow-hidden mt-8 mx-auto max-w-4xl transform scale-90">
+    <div class="carousel flex transition-transform ease-out duration-500" id="carousel">
+        
+    </div>
+    
+    
+    <button id="prevBtn" class="absolute top-0 left-0 h-full w-[10%] flex items-center justify-center bg-transparent hover:bg-gray-700 hover:bg-opacity-30">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+    </button>
+    <button id="nextBtn" class="absolute top-0 right-0 h-full w-[10%] flex items-center justify-center bg-transparent hover:bg-gray-700 hover:bg-opacity-30">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+    </button>
+</section>
+
+
+<section id="sobre" class="p-10 bg-gray-100 pb-20">
+  <div class="text-left max-w-3xl mx-auto">
+      <h2 class="text-2xl font-bold text-green-700">Sobre Eco Storage</h2>
+      <p class="mt-4">Aqui no Eco Storage, nos dedicamos a oferecer soluções de armazenamento sustentável para um futuro melhor. Nossa missão é garantir que nossos métodos sejam eficientes e eco-friendly, ajudando a preservar o planeta para as próximas gerações.</p>
+  </div>
+</section>
+
+<footer class="bg-gray-800 text-white text-center py-4 fixed inset-x-0 bottom-0">
+    <p>&copy; 2024 Eco Storage. Todos os direitos reservados.</p>
+</footer>
+
+<script>
+    const images = [
+        "https://www.pontotel.com.br/local/wp-content/uploads/2022/05/imagem-corporativa.webp",
+        "https://files.tecnoblog.net/wp-content/uploads/2022/09/stable-diffusion-imagem.jpg",
+        "https://s2-techtudo.glbimg.com/L9wb1xt7tjjL-Ocvos-Ju0tVmfc=/0x0:1200x800/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2023/q/l/TIdfl2SA6J16XZAy56Mw/canvaai.png"
+    ];
+
+    const carouselContainer = document.getElementById('carousel');
+    let currentIndex = 0;
+
+    // Gerar os itens dinamicamente
+    images.forEach((src, index) => {
+        const item = document.createElement('div');
+        item.classList.add('carousel-item', 'min-w-full');
+        item.innerHTML = `<img src="${src}" alt="Imagem ${index + 1}" class="w-full h-full object-cover">`;
+        carouselContainer.appendChild(item);
+    });
+
+    // Função de navegação
+    function updateCarousel() {
+        carouselContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+        currentIndex = (currentIndex === 0) ? images.length - 1 : currentIndex - 1;
+        updateCarousel();
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+        currentIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
+        updateCarousel();
+    });
+</script>
+
+
 <nav>
     {% if user.is_authenticated %}
         <div class="welcome">Olá, {{ user.username }}!</div>

@@ -23,7 +23,7 @@ def user_login(request):
                 # Obtém a ONG do usuário e redireciona para a página específica dela
                 try:
                     ong = user.ong
-                    return redirect('ong_detail', pk=ong.pk)
+                    return redirect('ong_detail', id=ong.id)
                 except ONG.DoesNotExist:
                     # Caso o usuário não tenha uma ONG associada, redireciona para 'mapa'
                     return redirect('mapa')
@@ -84,18 +84,19 @@ class OngDetailView(LoginRequiredMixin, DetailView):
     model = ONG
     template_name = 'ong_detail.html'
     context_object_name = 'ong'
+    pk_url_kwarg = 'id'
 
     def get_queryset(self):
         # Filtra para que apenas a ONG do usuário logado seja acessada
         return ONG.objects.filter(usuario=self.request.user)
 
-def verificar_ong(request, pk):
-    ong = get_object_or_404(ONG, pk=pk, usuario=request.user)
-    return render(request, 'ong_detail.html', {'ong': ong})
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['residuos'] = Residuos.objects.filter(ong=self.object)
+        return context
 
-from django.shortcuts import render, redirect, get_object_or_404
+    
 from .forms import ONGForm
-from .models import ONG
 
 def update_ong(request, ong_id):
     ong = get_object_or_404(ONG, id=ong_id)
@@ -109,8 +110,39 @@ def update_ong(request, ong_id):
         if form.is_valid():
             form.save()
             messages.success(request, "Informações atualizadas com sucesso!")
-            return redirect('ong_detail', pk=ong.id)
+            return redirect('ong_detail', id=ong.id)
     else:
         form = ONGForm(instance=ong)
     
     return render(request, 'ong_detail.html', {'form': form, 'ong': ong})
+
+def ong_detail(request, id):
+    ong = get_object_or_404(ONG, id=id)
+    residuos = Residuos.objects.filter(ong=ong)  # Certifique-se de filtrar os resíduos pela ONG correta
+    return render(request, 'ong_detail.html', {'ong': ong, 'residuos': residuos})
+
+def adicionar_residuo(request, ong_id):
+    ong = get_object_or_404(ONG, id=ong_id)
+    if request.method == 'POST':
+        tipo = request.POST.get('tipo')
+        quantidade = request.POST.get('quantidade')
+        peso = request.POST.get('peso')
+        status = request.POST.get('status')
+        descricao = request.POST.get('descricao')
+
+        Residuos.objects.create(
+            ong=ong,
+            tipo=tipo,
+            quantidade=quantidade,
+            peso=peso,
+            status=status,
+            descricao=descricao,
+        )
+        return redirect('ong_detail', id=ong_id) 
+    return redirect('home')
+
+
+def remover_residuo(request, residuo_id):
+    resíduo = get_object_or_404(Residuos, id=residuo_id)
+    resíduo.delete()
+    return redirect('ong_detail', id=resíduo.ong.id)  
