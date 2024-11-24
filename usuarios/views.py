@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.contrib.auth.models import User
-from .models import  ONG, Residuos
+from .models import  ONG, Residuos, AvaliacaoONG
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView
 from .forms import ONGForm
@@ -145,4 +145,17 @@ def adicionar_residuo(request, ong_id):
 def remover_residuo(request, residuo_id):
     resíduo = get_object_or_404(Residuos, id=residuo_id)
     resíduo.delete()
-    return redirect('ong_detail', id=resíduo.ong.id)  
+    return redirect('ong_detail', id=resíduo.ong.id) 
+
+def add_review(request, ong_id):
+    ong = get_object_or_404(ONG, id=ong_id)
+    if request.method == 'POST':
+        nota = request.POST.get('nota')
+        AvaliacaoONG.objects.create(
+            ong=ong,
+            usuario=request.user,
+            nota=nota
+        )
+        return redirect('ong_detail', id=ong_id)
+    
+

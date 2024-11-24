@@ -27,3 +27,13 @@ class Residuos(models.Model):
     
     def __str__(self):
         return f"{self.tipo} - {self.quantidade} unidades"
+    
+class AvaliacaoONG(models.Model):
+    ong = models.ForeignKey(ONG, on_delete=models.CASCADE, related_name='avaliacoes')
+    nota = models.IntegerField()
+
+    class Meta:
+        unique_together = ('nota','ong')
+
+    def __str__(self):
+        return f"{self.ong.nome} - {self.nota}"
