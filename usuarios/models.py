@@ -37,3 +37,23 @@ class AvaliacaoONG(models.Model):
 
     def __str__(self):
         return f"{self.ong.nome} - {self.nota}"
+    
+class RemoverAvaliacao(models.Model):
+    ong = models.ForeignKey(ONG, on_delete=models.CASCADE, related_name='remover_avaliacoes')
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, related_name='remover_avaliacoes')
+
+    class Meta:
+        unique_together = ('ong', 'usuario')
+
+    def __str__(self):
+        return f"{self.ong.nome} - {self.usuario.username}" 
+    
+class EditarAvaliacao(models.Model):
+    ong = models.ForeignKey(ONG, on_delete=models.CASCADE, related_name='editar_avaliacoes')
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, related_name='editar_avaliacoes')
+
+    class Meta:
+        unique_together = ('ong', 'usuario')
+
+    def __str__(self):
+        return f"{self.ong.nome} - {self.usuario.username}" 

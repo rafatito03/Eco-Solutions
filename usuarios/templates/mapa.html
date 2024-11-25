@@ -8,28 +8,29 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <style>
+        /* ... existing code ... */
+        .sidebar {
+        position: absolute;  /* Position relative to the map */
+        top: 0;             /* Align to top of map */
+        left: 0;            /* Align to left of map */
+        height: 100%;       /* Full height of map */
+        width: 350px;
+        background-color: rgba(255, 255, 255, 0.95);
+        border-right: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        display: none;      /* Hidden by default */
+        z-index: 1000;
+        }
+        .sidebar-open {
+            display: block;     /* Simply show when open */
+        }   
+    
+        /* Make the map container position relative for absolute positioning context */
         #map {
             height: 900px;
             width: 100%;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        /* Estilo da sidebar com animação */
-        .sidebar {
-            position: absolute;
-            top: 20px;
-            right: 10px;
-            width: 300px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transform: translateX(120%);
-            transition: transform 0.5s ease-in-out;
-            z-index: 1000;
-        }
-        /* Mostrar a sidebar */
-        .sidebar-open {
-            transform: translateX(0);
         }
     </style>
 </head>
