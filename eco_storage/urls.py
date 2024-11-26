@@ -11,8 +11,10 @@ urlpatterns = [
     path('mapa/',views.mapa,name='mapa'),
     path('ong/<int:id>/', views.OngDetailView.as_view(), name='ong_detail'),
     path('ong/<int:ong_id>/update/', views.update_ong, name='update_ong'),
-    
+    path('ong/<int:ong_id>/avaliar/', views.avaliar_ong, name='avaliar_ong'),
     path('adicionar_residuo/<int:ong_id>/', views.adicionar_residuo, name='adicionar_residuo'),
     path('remover_residuo/<int:residuo_id>/', views.remover_residuo, name='remover_residuo'),
-    
+    path('armazenamento/', views.armazenamento_metros, name='storage_meters'),
+    path('armazenamento/adicionar/<int:ong_id>/', views.adicionar_armazenamento, name='add_storage'),
+    path('armazenamento/atualizar/<int:armazenamento_id>/', views.atualizar_armazenamento, name='update_storage'),
 ]

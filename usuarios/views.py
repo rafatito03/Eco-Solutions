@@ -4,10 +4,12 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.contrib.auth.models import User
-from .models import  ONG, Residuos, AvaliacaoONG
+from .models import  ONG, Residuos, AvaliacaoONG, Armazenamento, PerfilUsuario
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView
-from .forms import ONGForm
+from .forms import ONGForm, ResiduoForm
+from decimal import Decimal
+from django.db.models import Avg
 
 def user_login(request):
     if request.method == 'POST':
@@ -19,14 +21,9 @@ def user_login(request):
             if user is not None:
                 auth_login(request, user)
                 messages.success(request, f'Bem-vindo, {username}!')
-
-                # Obtém a ONG do usuário e redireciona para a página específica dela
-                try:
-                    ong = user.ong
-                    return redirect('ong_detail', id=ong.id)
-                except ONG.DoesNotExist:
-                    # Caso o usuário não tenha uma ONG associada, redireciona para 'mapa'
-                    return redirect('mapa')
+                
+                # Redireciona para a página do mapa após o login
+                return redirect('mapa')
             else:
                 messages.error(request, 'Usuário ou senha inválidos.')
         else:
@@ -37,7 +34,7 @@ def user_login(request):
 
 def user_logout(request):
     auth_logout(request)
-    messages.info(request, 'Você saiu da sua conta.')
+    messages.success(request, 'Você saiu com sucesso!')
     return redirect('home') 
 
 
@@ -51,6 +48,7 @@ def cadastro(request):
         email = request.POST.get('email')
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
+        is_avaliador = request.POST.get('is_avaliador') == 'on'
 
         if password1 != password2:
             messages.error(request, 'As senhas não coincidem.')
@@ -64,7 +62,15 @@ def cadastro(request):
             messages.error(request, 'E-mail já está em uso.')
             return render(request, 'cadastro.html')
 
+        # Criar usuário
         user = User.objects.create_user(username=username, email=email, password=password1)
+        
+        # Criar perfil do usuário com a opção de avaliador
+        PerfilUsuario.objects.create(
+            usuario=user,
+            is_avaliador=is_avaliador
+        )
+
         auth_login(request, user)
         messages.success(request, 'Cadastro realizado com sucesso!')
         return redirect('home')
@@ -74,8 +80,24 @@ def cadastro(request):
 
 
 def mapa(request):
-    locais = ONG.objects.all()
-    return render(request, 'mapa.html', {'locais': locais})
+    locais = ONG.objects.prefetch_related('avaliacoes').annotate(
+        nota_media=Avg('avaliacoes__nota')
+    ).all()
+    
+    context = {
+        'locais': [{
+            'id': local.id,
+            'nome': local.nome,
+            'latitude': local.latitude,
+            'longitude': local.longitude,
+            'informacao': local.informacao,
+            'endereco': local.endereco,
+            'imagem': local.imagem,
+            'nota_media': float(local.nota_media) if local.nota_media else 0,
+            'armazenamento': list(local.armazenamento_set.all().values())
+        } for local in locais]
+    }
+    return render(request, 'mapa.html', context)
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView
@@ -123,23 +145,24 @@ def ong_detail(request, id):
 
 def adicionar_residuo(request, ong_id):
     ong = get_object_or_404(ONG, id=ong_id)
-    if request.method == 'POST':
-        tipo = request.POST.get('tipo')
-        quantidade = request.POST.get('quantidade')
-        peso = request.POST.get('peso')
-        status = request.POST.get('status')
-        descricao = request.POST.get('descricao')
+    
+    # Verifica se o usuário é dono da ONG
+    if request.user != ong.usuario:
+        messages.error(request, 'Você não tem permissão para adicionar resíduos a esta ONG.')
+        return redirect('ong_detail', id=ong_id)
 
-        Residuos.objects.create(
-            ong=ong,
-            tipo=tipo,
-            quantidade=quantidade,
-            peso=peso,
-            status=status,
-            descricao=descricao,
-        )
-        return redirect('ong_detail', id=ong_id) 
-    return redirect('home')
+    if request.method == 'POST':
+        form = ResiduoForm(request.POST)
+        if form.is_valid():
+            residuo = form.save(commit=False)
+            residuo.ong = ong
+            residuo.save()
+            messages.success(request, 'Resíduo adicionado com sucesso!')
+            return redirect('ong_detail', id=ong_id)
+    else:
+        form = ResiduoForm()
+
+    return redirect('ong_detail', id=ong_id)
 
 
 def remover_residuo(request, residuo_id):
@@ -158,4 +181,88 @@ def add_review(request, ong_id):
         )
         return redirect('ong_detail', id=ong_id)
     
+
+def armazenamento_metros(request):
+    """View para exibir todas as ONGs e seus metros de armazenamento"""
+    ongs = ONG.objects.prefetch_related('armazenamento_set').all()
+    return render(request, 'armazenamento_metros.html', {'ongs': ongs})
+
+@login_required
+def adicionar_armazenamento(request, ong_id):
+    """View para adicionar ou atualizar metros de armazenamento para uma ONG"""
+    if request.method == 'POST':
+        ong = get_object_or_404(ONG, id=ong_id)
+        tipo_tecido = request.POST.get('tipo_tecido')
+        metros = Decimal(request.POST.get('metros', 0))
+
+        if metros < 0:
+            messages.error(request, 'A metragem não pode ser negativa.')
+            return redirect('storage_meters')
+
+        # Tenta atualizar armazenamento existente ou criar novo
+        armazenamento, criado = Armazenamento.objects.update_or_create(
+            ong=ong,
+            tipo_tecido=tipo_tecido,
+            defaults={'metros': metros}
+        )
+
+        acao = 'adicionada' if criado else 'atualizada'
+        messages.success(request, f'Metragem {acao} com sucesso!')
+    
+    return redirect('storage_meters')
+
+@login_required
+def atualizar_armazenamento(request, armazenamento_id):
+    """View para atualizar entrada de armazenamento existente"""
+    if request.method == 'POST':
+        armazenamento = get_object_or_404(Armazenamento, id=armazenamento_id)
+        novos_metros = Decimal(request.POST.get('metros', 0))
+
+        if novos_metros < 0:
+            messages.error(request, 'A metragem não pode ser negativa.')
+            return redirect('storage_meters')
+
+        armazenamento.metros = novos_metros
+        armazenamento.save()
+        messages.success(request, 'Metragem atualizada com sucesso!')
+
+    return redirect('storage_meters')
+
+@login_required
+def avaliar_ong(request, ong_id):
+    if not request.user.perfil.is_avaliador:
+        messages.error(request, 'Apenas avaliadores podem avaliar ONGs.')
+        return redirect('mapa')
+
+    ong = get_object_or_404(ONG, id=ong_id)
+    
+    if request.user == ong.usuario:
+        messages.error(request, 'Você não pode avaliar sua própria ONG.')
+        return redirect('mapa')
+
+    if request.method == 'POST':
+        try:
+            nota = int(request.POST.get('nota'))
+            if not (1 <= nota <= 5):
+                raise ValueError('Nota inválida')
+                
+            comentario = request.POST.get('comentario', '')
+            
+            avaliacao, created = AvaliacaoONG.objects.update_or_create(
+                ong=ong,
+                usuario=request.user,
+                defaults={
+                    'nota': nota,
+                    'comentario': comentario
+                }
+            )
+
+            messages.success(request, 
+                'Avaliação registrada com sucesso!' if created else 'Avaliação atualizada com sucesso!')
+            
+        except (ValueError, TypeError):
+            messages.error(request, 'Por favor, forneça uma nota válida entre 1 e 5.')
+        
+    return redirect('mapa')
+
 
