@@ -83,7 +83,7 @@ def cadastro(request):
 def mapa(request):
     locais = ONG.objects.prefetch_related('avaliacoes', 'residuos').annotate(
     nota_media=Avg('avaliacoes__nota'),
-    capacidade_atual=Sum('residuos__peso')
+    capacidade_atual=Sum('residuos__peso',distinct=True)
 ).all()
     
     context = {
@@ -98,7 +98,8 @@ def mapa(request):
             'nota_media': float(local.nota_media) if local.nota_media else 0,
             'capacidade_atual': local.capacidade_atual if local.capacidade_atual else 0,
             'capacidade_maxima': local.capacidade_maxima,
-            'capacidade_percentual': local.capacidade_percentual
+            'capacidade_percentual': (local.capacidade_atual / local.capacidade_maxima) * 100 if local.capacidade_maxima > 0 else 0
+            
             
         } for local in locais]
     }
