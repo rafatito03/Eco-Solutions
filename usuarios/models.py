@@ -20,6 +20,7 @@ class ONG(models.Model):
     telefone = models.CharField(max_length=30, default='(00) 00000-0000')
     whatsapp = models.CharField(max_length=30, default='http://wa.me/5581994382896')
     capacidade_maxima = models.FloatField(default=0)
+    horario_funcionamento= models.CharField(max_length=255,default='das 8 ás 17h')
 
     def __str__(self):
         return self.nome

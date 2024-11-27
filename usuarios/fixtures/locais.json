@@ -13,7 +13,8 @@
             "usuario": null,
             "telefone": "(00) 00000-0000",
             "whatsapp": "http://wa.me/5581994382896",
-            "capacidade_maxima": 0
+            "capacidade_maxima": 0,
+            "horario_funcionamento": "das 7h às 18h"
         }
     },
     {
@@ -30,7 +31,8 @@
             "usuario": null,
             "telefone": "(00) 00000-0000",
             "whatsapp": "http://wa.me/5581994382896",
-            "capacidade_maxima": 0
+            "capacidade_maxima": 0,
+            "horario_funcionamento": "das 8h às 19h"
         }
     }
 ]

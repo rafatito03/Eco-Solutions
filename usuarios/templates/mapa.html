@@ -167,6 +167,14 @@
         locais.forEach(function(local) {
             var marker = L.marker([local.latitude, local.longitude]).addTo(map);
             
+            marker.on('mouseover', function() {
+                marker.bindPopup(`<b>${local.nome}</b><br>${local.informacao}<br>${local.endereco}`).openPopup();
+            });
+
+            marker.on('mouseout', function() {
+                marker.closePopup();
+            });
+
             marker.on('click', function() {
                 document.getElementById('localName').innerText = local.nome;
                 document.getElementById('localInfo').innerText = local.informacao;
@@ -188,8 +196,6 @@
                 
                 document.getElementById('infoSidebar').classList.add('sidebar-open');
             });
-
-            marker.bindPopup(`<b>${local.nome}</b><br>${local.informacao}<br>${local.endereco}`);
         });
 
         // Evento para fechar a sidebar
