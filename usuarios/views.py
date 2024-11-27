@@ -95,6 +95,9 @@ def mapa(request):
             'informacao': local.informacao,
             'endereco': local.endereco,
             'imagem': local.imagem,
+            'whatsapp': local.whatsapp,
+            'telefone': local.telefone,
+            'horario_funcionamento': local.horario_funcionamento,
             'nota_media': float(local.nota_media) if local.nota_media else 0,
             'capacidade_atual': local.capacidade_atual if local.capacidade_atual else 0,
             'capacidade_maxima': local.capacidade_maxima,
@@ -174,6 +177,7 @@ def adicionar_residuo(request, ong_id):
 def remover_residuo(request, residuo_id):
     resíduo = get_object_or_404(Residuos, id=residuo_id)
     resíduo.delete()
+    messages.success(request, 'Resíduo removido com sucesso!')
     return redirect('ong_detail', id=resíduo.ong.id) 
 
 

@@ -47,6 +47,9 @@
         <div class="flex items-center">
             <h1 class="text-green-500 text-2xl mr-10">EcoStorage</h1>
             <a href="/" class="text-white py-7 px-5 hover:bg-gray-300 hover:text-black">Home</a>
+            {% if user.is_authenticated and user.ong %}
+            <a href="{% url 'ong_detail' user.ong.id %}" class="text-white py-7 px-5 hover:bg-gray-300 hover:text-black">Minha ONG</a>
+            {% endif %} 
         </div>
         <div class="auth-buttons flex items-center">
             {% if user.is_authenticated %}
@@ -124,7 +127,12 @@
         </div>
 
         <img id="localImage" src="" alt="Imagem do Local" class="w-full h-40 object-cover rounded-lg mt-4 shadow-md">
-
+        <!-- Link para Waze -->
+        <div class="mt-4">
+            <a id="wazeLink" href="#" target="_blank" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                Navegar com Waze
+            </a>
+        </div>
         <!-- Capacidade da ONG -->
         <div class="mt-4">
             <h3 class="text-lg font-semibold text-gray-800">Capacidade</h3>
@@ -155,6 +163,9 @@
                 latitude: {{ local.latitude }},
                 longitude: {{ local.longitude }},
                 imagem: "{{ local.imagem }}",
+                whatsapp: "{{ local.whatsapp }}",
+                telefone: "{{ local.telefone }}",
+                horario_funcionamento: "{{ local.horario_funcionamento }}",
                 nota_media: {{ local.nota_media|default:"0" }},
                 capacidade_atual: {{ local.capacidade_atual|default:"0" }},
                 capacidade_maxima: {{ local.capacidade_maxima|default:"0" }},
@@ -168,7 +179,7 @@
             var marker = L.marker([local.latitude, local.longitude]).addTo(map);
             
             marker.on('mouseover', function() {
-                marker.bindPopup(`<b>${local.nome}</b><br>${local.informacao}<br>${local.endereco}`).openPopup();
+                marker.bindPopup(`<b>${local.nome}</b><br>${local.horario_funcionamento}<br>${local.endereco}`).openPopup();
             });
 
             marker.on('mouseout', function() {
@@ -194,6 +205,9 @@
                 document.getElementById('batteryLevel').style.width = `${local.capacidade_percentual}%`;
                 document.getElementById('capacidadeText').innerText = `Capacidade: ${local.capacidade_atual} / ${local.capacidade_maxima}`;
                 
+                // Atualiza o link do Waze
+                document.getElementById('wazeLink').href = `https://waze.com/ul?ll=${local.latitude},${local.longitude}&navigate=yes`;
+
                 document.getElementById('infoSidebar').classList.add('sidebar-open');
             });
         });

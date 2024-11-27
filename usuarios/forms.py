@@ -5,7 +5,7 @@ from .models import ONG, Residuos
 class ONGForm(forms.ModelForm):
     class Meta:
         model = ONG
-        fields = ['nome', 'cnpj', 'endereco','latitude','longitude','informacao','imagem']  
+        fields = ['nome', 'cnpj', 'endereco', 'latitude', 'longitude', 'informacao', 'imagem', 'telefone', 'whatsapp', 'capacidade_maxima', 'horario_funcionamento']  
 latitude = forms.CharField(max_length=255, required=True)
 longitude = forms.CharField(max_length=255, required=True)
 
