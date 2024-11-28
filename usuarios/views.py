@@ -101,7 +101,7 @@ def mapa(request):
             'nota_media': float(local.nota_media) if local.nota_media else 0,
             'capacidade_atual': local.capacidade_atual if local.capacidade_atual else 0,
             'capacidade_maxima': local.capacidade_maxima,
-            'capacidade_percentual': (local.capacidade_atual / local.capacidade_maxima) * 100 if local.capacidade_maxima > 0 else 0
+            'capacidade_percentual': (local.capacidade_atual / local.capacidade_maxima) * 100 if local.capacidade_atual and local.capacidade_maxima else 0
             
             
         } for local in locais]
