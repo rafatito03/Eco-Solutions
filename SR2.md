@@ -1,6 +1,12 @@
 [Screencast CI/CD G09](https://youtu.be/eFDLo6aWeGg)
 
 [Screencast testes G09](https://youtu.be/-sc3ooL2jvI)
+
+[Screencast Protótipo de média fidelidade](https://youtu.be/ngcamw3nYnw)
+
+[Protótipo de média fidelidade](https://www.figma.com/design/MbJEOcZNmzkNZshfwB1Tgr/lowfi-ecostorage-gogo?node-id=0-1&node-type=canvas&t=7ohRnEn0rMPRHHFA-0)
+  
+
 # Histórias de Usuário
 
 ## 1. Como usuário, gostaria de avaliar ONGs
