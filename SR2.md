@@ -5,6 +5,8 @@
 [Screencast Protótipo de média fidelidade](https://youtu.be/ngcamw3nYnw)
 
 [Protótipo de média fidelidade](https://www.figma.com/design/MbJEOcZNmzkNZshfwB1Tgr/lowfi-ecostorage-gogo?node-id=0-1&node-type=canvas&t=7ohRnEn0rMPRHHFA-0)
+
+[Diagrama de Atividades](https://drive.google.com/file/d/1aFjQFdqnjbixS3VZI18kmLsCGPx637HP/view?usp=drive_link)
   
 
 # Histórias de Usuário
