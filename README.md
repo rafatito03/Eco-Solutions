@@ -69,7 +69,7 @@ Para rodar o projeto localmente, siga os passos abaixo:
     ```
 5. Instale o Django:
    ```
-   pip install django
+   pip install -r requirements.txt
    ```
 6. Inicie o servidor de desenvolvimento:
     ```
