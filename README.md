@@ -3,6 +3,7 @@
 Este projeto é uma plataforma web que permite a localização de doações de tecidos para ONGs. Ele apresenta um mapa interativo onde os usuários podem visualizar, cadastrar e buscar por pontos de coleta de tecidos, facilitando a distribuição e reutilização de materiais para projetos sociais e ambientais.
 
 ## Índice
+- [Google Site](#Google-Site)
 - [Link SR1](#link-sr1)
 - [Link SR2](#link-sr2)
 - [Descrição do Projeto](#descrição-do-projeto)
@@ -12,6 +13,9 @@ Este projeto é uma plataforma web que permite a localização de doações de t
 - [Instalação](#instalação)
 - [Como Usar](#como-usar)
 - [Licença](#licença)
+
+## Google Site
+- [Link Google](https://sites.google.com/cesar.school/ecosolutions/documentos/requisitos-cc?authuser=0)
 
 ## Link SR1
 - [SR1](https://github.com/rafatito03/Eco-Solutions/blob/main/SR1.md)
