@@ -7,6 +7,7 @@ Este projeto é uma plataforma web que permite a localização de doações de t
 - [Link SR2](#link-sr2)
 - [Descrição do Projeto](#descrição-do-projeto)
 - [Funcionalidades](#funcionalidades)
+- [Testes](#Testes)
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [Instalação](#instalação)
 - [Como Usar](#como-usar)
@@ -26,6 +27,9 @@ O **Eco Solutionss** tem como objetivo conectar doadores e ONGs que precisam de 
 
 - **Mapa Interativo:** Visualização de pontos de coleta de doações de tecidos geolocalizados.
 - **Informações Detalhadas:** Cada ponto de coleta possui detalhes como horário de funcionamento, tipos de tecidos aceitos e informações de contato.
+
+## Screencasts
+- [Teste E2E](https://youtu.be/-sc3ooL2jvI)
 
 ## Tecnologias Utilizadas
 
